@@ -1,9 +1,11 @@
-import React from "react"
+import React from "react";
+import MemeCaption from "./MemeCaption";
 
 function Meme() {
+
   return (
-    <div className="App">
-      I am some controls!
+    <div className="controls">
+      <MemeCaption />
     </div>
   );
 }

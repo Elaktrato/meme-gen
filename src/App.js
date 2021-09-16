@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import Meme from "./Meme";
 import Controls from "./Controls";
@@ -36,10 +35,30 @@ function App() {
     ourMemes()
   }, [])
 
+const memeId = () => {
+  return Math.floor(Math.random() * 100) 
+}
+
+
+
+let memeGen;
+if(loadingMemes){
+  memeGen = "loading..."
+}else{
+  memeGen = (
+    <div>
+    <Controls />
+    <Meme 
+    memes={memes} 
+    memeId={memeId}
+    />
+    </div>
+    )
+}
+
   return (
     <div className="App">
-      <Controls />
-      <Meme memes={memes} />
+      {memeGen}
     </div>
   );
 }
