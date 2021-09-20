@@ -1,10 +1,9 @@
 import React from "react";
 
-function CaptionText() {
-
+function CaptionText(props) {
   return (
-    <div className="memeCaptionText" top="" left="">
-      <div className="leCaption">I am a caption text</div>
+    <div className="memeCaptionText" style={{top: `${props.caption.captionY}%`, left: `${props.caption.captionX}%`}}>
+      <div className="leCaption">{props.caption.captionText}</div>
     </div>
   );
 }

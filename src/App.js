@@ -9,6 +9,20 @@ function App() {
 
   const [loadingMemes, setLoadingMemes] = useState(true)
 
+  const [captions, setCaptions] = useState(
+    { 
+      captions:
+      [
+        {
+          id: 1,
+          captionText: "sample text",
+          captionX: 0,
+          captionY: 0
+        }
+      ]
+    }
+  )
+
   const getMemes = async () => {
     const api = "https://api.imgflip.com/get_memes"
     let leMemes;
@@ -25,7 +39,24 @@ function App() {
     }
     return leMemes
   }
-  
+
+  const handleCaptionChange = (capData) =>{
+    const newCaptions = captions.captions.map((cap) => {
+      if (cap.id !== capData.id) {
+        return cap;
+      }
+      return {
+        ...cap,
+        captionText: capData.captionText,
+      };
+    });
+    setCaptions({ captions: newCaptions });
+  }
+
+  const memeId = () => {
+    return Math.floor(Math.random() * 100) 
+  }
+
   useEffect(() =>  {
     async function ourMemes() {
     setMemes(await getMemes());
@@ -35,11 +66,6 @@ function App() {
     ourMemes()
   }, [])
 
-const memeId = () => {
-  return Math.floor(Math.random() * 100) 
-}
-
-
 
 let memeGen;
 if(loadingMemes){
@@ -47,10 +73,14 @@ if(loadingMemes){
 }else{
   memeGen = (
     <div>
-    <Controls />
+    <Controls 
+    handleCaptionChange={handleCaptionChange}
+    captions={captions}
+    />
     <Meme 
     memes={memes} 
     memeId={memeId}
+    captions={captions}
     />
     </div>
     )

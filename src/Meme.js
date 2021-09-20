@@ -3,11 +3,17 @@ import CaptionText from "./CaptionText"
 
 function Meme(props) {
   let ourMemeId = props.memeId()
-  console.log(ourMemeId)
+  console.log(props)
   return (
     <div className="memeinator">
       <img className="memeImg" src={props.memes.data.memes[ourMemeId].url} />
-      <CaptionText />
+      {props.captions.captions.map(
+        (caption) => 
+            {
+              return <CaptionText caption={caption} />
+            }
+          )
+        }
     </div>
   );
 }
